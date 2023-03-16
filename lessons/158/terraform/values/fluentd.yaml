@@ -22,11 +22,10 @@ forwarder:
         pos_file /opt/bitnami/fluentd/logs/buffers/fluentd-docker.pos
         tag kubernetes.*
         read_from_head true
-        <parse>
-          @type json
-          time_key time
-          time_format %Y-%m-%dT%H:%M:%S.%NZ
-        </parse>
+      <parse>
+        @type regexp
+        expression /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
+      </parse>
       </source>
       # enrich with kubernetes metadata
       <filter kubernetes.**>
@@ -37,9 +36,12 @@ forwarder:
       <match fluentd.healthcheck>
         @type stdout
       </match>
-      # Send the logs to the standard output
+
       <match **>
-        @type stdout
+        @type elasticsearch
+        host elk-elasticsearch-coordinating-hl.elk
+        port 9200
+        logstash_format true
       </match>
     fluentd.conf: |
       # Ignore fluentd own events
