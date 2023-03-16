@@ -1,4 +1,4 @@
-# resource "helm_release" "istio_base" {
+# resource "helm_release" "elk" {
 #   name = "elk"
 
 #   repository       = "https://charts.bitnami.com/bitnami"
@@ -8,7 +8,12 @@
 #   version          = "19.5.14"
 
 #   set {
-#     name  = "global.istioNamespace"
-#     value = "istio-system"
+#     name  = "data.persistence.storageClass"
+#     value = "ssd"
+#   }
+
+#   set {
+#     name  = "data.persistence.size"
+#     value = "100Gi"
 #   }
 # }
