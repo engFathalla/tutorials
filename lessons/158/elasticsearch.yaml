@@ -1745,7 +1745,6 @@ ingest:
     ##
     extraRules: []
 
-
 ## @section Metrics parameters
 
 ## Elasticsearch Prometheus exporter configuration
@@ -2072,15 +2071,15 @@ metrics:
     ##
     additionalLabels: {}
     ## @param metrics.prometheusRule.rules Prometheus Rule definitions
-      # - alert: es cluster error
-      #   annotations:
-      #     summary: "es cluster error"
-      #     description: "es cluster error, cluster state {{`{{`}} $labels.color {{`}}`}}"
-      #   expr: elasticsearch_cluster_health_status{color="red"} ==1 or elasticsearch_cluster_health_status{color="yellow"} ==1
-      #   for: 1m
-      #   labels:
-      #     severity: critical
-      #     group: PaaS
+    # - alert: es cluster error
+    #   annotations:
+    #     summary: "es cluster error"
+    #     description: "es cluster error, cluster state {{`{{`}} $labels.color {{`}}`}}"
+    #   expr: elasticsearch_cluster_health_status{color="red"} ==1 or elasticsearch_cluster_health_status{color="yellow"} ==1
+    #   for: 1m
+    #   labels:
+    #     severity: critical
+    #     group: PaaS
     ##
     rules: []
 
@@ -2198,4 +2197,3 @@ kibana:
     hosts:
       - '{{ include "elasticsearch.service.name" . }}'
     port: '{{ include "elasticsearch.service.ports.restAPI" . }}'
-
