@@ -1,0 +1,88 @@
+apiVersion: v1
+data:
+  fluentd-inputs.conf: |
+    # HTTP input for the liveness and readiness probes
+    <source>
+      @type http
+      port 9880
+    </source>
+    # Get the logs from the containers running in the node
+    <source>
+      @type tail
+      path /var/log/containers/*.log
+      # exclude Fluentd logs
+      exclude_path /var/log/containers/*fluentd*.log
+      pos_file /opt/bitnami/fluentd/logs/buffers/fluentd-docker.pos
+      tag kubernetes.*
+      read_from_head true
+      <parse>
+        @type json
+        time_key time
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+      </parse>
+    </source>
+    # enrich with kubernetes metadata
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+    </filter>
+  fluentd-output.conf: |
+    # Throw the healthcheck to the standard output instead of forwarding it
+    <match fluentd.healthcheck>
+      @type stdout
+    </match>
+    # Send the logs to the standard output
+    <match **>
+      @type stdout
+    </match>
+  fluentd.conf: |
+    # Ignore fluentd own events
+    <match fluent.**>
+      @type null
+    </match>
+
+    @include fluentd-inputs.conf
+    @include fluentd-output.conf
+  metrics.conf: |
+    # Prometheus Exporter Plugin
+    # input plugin that exports metrics
+    <source>
+      @type prometheus
+      port 24231
+    </source>
+    # input plugin that collects metrics from MonitorAgent
+    <source>
+      @type prometheus_monitor
+      <labels>
+        host ${hostname}
+      </labels>
+    </source>
+    # input plugin that collects metrics for output plugin
+    <source>
+      @type prometheus_output_monitor
+      <labels>
+        host ${hostname}
+      </labels>
+    </source>
+    # input plugin that collects metrics for in_tail plugin
+    <source>
+      @type prometheus_tail_monitor
+      <labels>
+        host ${hostname}
+      </labels>
+    </source>
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: logging
+    meta.helm.sh/release-namespace: logging
+  creationTimestamp: "2023-03-16T19:08:38Z"
+  labels:
+    app.kubernetes.io/component: forwarder
+    app.kubernetes.io/instance: logging
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: fluentd
+    helm.sh/chart: fluentd-5.5.16
+  name: logging-fluentd-forwarder-cm
+  namespace: logging
+  resourceVersion: "2241464"
+  uid: b920d5bc-a9bd-4a7c-a854-5ba21b2ded3c

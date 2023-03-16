@@ -21,4 +21,9 @@ resource "helm_release" "fluentd" {
     name  = "forwarder.tolerations[0].effect"
     value = "NoSchedule"
   }
+
+  set {
+    name  = "aggregator.enabled"
+    value = "false"
+  }
 }
