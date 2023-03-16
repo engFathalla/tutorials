@@ -16,4 +16,29 @@ resource "helm_release" "kibana" {
     name  = "persistence.enabled"
     value = "false"
   }
+
+  set {
+    name  = "elasticsearch.hosts[0]"
+    value = "elk-elasticsearch-coordinating-hl.elk"
+  }
+
+  set {
+    name  = "elasticsearch.port"
+    value = "port"
+  }
+
+  set {
+    name  = "tolerations[0].key"
+    value = "elk"
+  }
+
+  set {
+    name  = "tolerations[0].operator"
+    value = "Exists"
+  }
+
+  set {
+    name  = "tolerations[0].effect"
+    value = "NoSchedule"
+  }
 }
