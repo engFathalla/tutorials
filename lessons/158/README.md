@@ -51,4 +51,10 @@ kubectl taint nodes node-00 elk=true:NoSchedule
 kubectl taint nodes node-02 fluentd=true:NoSchedule
 kubectl taint nodes node-03 fluentbit=true:NoSchedule
 kubectl taint nodes node-04 logstash=true:NoSchedule
-kubectl taint nodes node-04 prometheus=true:NoSchedule
+
+kubectl taint nodes node-04 prometheus=true:NoSchedule-
+
+
+kubectl label node node-02 service=myapp
+kubectl label node node-03 service=myapp
+kubectl label node node-04 service=myapp

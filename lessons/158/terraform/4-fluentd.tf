@@ -7,6 +7,10 @@ resource "helm_release" "fluentd" {
   create_namespace = true
   version          = "5.5.16"
 
+  values = [
+    "${file("values/fluentd.yaml")}"
+  ]
+
   set {
     name  = "forwarder.tolerations[0].key"
     value = "fluentd"
