@@ -41,6 +41,7 @@ data:
     </match>
 
     @include fluentd-inputs.conf
+
     @include fluentd-output.conf
   metrics.conf: |
     # Prometheus Exporter Plugin
@@ -75,7 +76,7 @@ metadata:
   annotations:
     meta.helm.sh/release-name: logging
     meta.helm.sh/release-namespace: logging
-  creationTimestamp: "2023-03-16T19:08:38Z"
+  creationTimestamp: "2023-03-16T20:21:37Z"
   labels:
     app.kubernetes.io/component: forwarder
     app.kubernetes.io/instance: logging
@@ -84,5 +85,5 @@ metadata:
     helm.sh/chart: fluentd-5.5.16
   name: logging-fluentd-forwarder-cm
   namespace: logging
-  resourceVersion: "2241464"
-  uid: b920d5bc-a9bd-4a7c-a854-5ba21b2ded3c
+  resourceVersion: "2252528"
+  uid: 58450222-01e3-4461-bed5-06ed7144a2f4
