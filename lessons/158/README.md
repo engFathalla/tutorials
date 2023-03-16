@@ -27,3 +27,5 @@ echo UUID=`sudo blkid -s UUID -o value /dev/sdc` /mnt/disks/$DISK_UUID ext4 defa
 
 
 kubectl label node node-00 service=elk
+
+kubectl taint nodes node-00 elk=true:NoSchedule

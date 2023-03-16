@@ -41,4 +41,69 @@ resource "helm_release" "elk" {
     name  = "coordinating.nodeSelector.service"
     value = "elk"
   }
+
+  set {
+    name  = "ingest.nodeSelector.service"
+    value = "elk"
+  }
+
+  set {
+    name  = "master.tolerations[0].key"
+    value = "elk"
+  }
+
+  set {
+    name  = "master.tolerations[0].operator"
+    value = "Exists"
+  }
+
+  set {
+    name  = "master.tolerations[0].effect"
+    value = "NoSchedule"
+  }
+
+  set {
+    name  = "data.tolerations[0].key"
+    value = "elk"
+  }
+
+  set {
+    name  = "data.tolerations[0].operator"
+    value = "Exists"
+  }
+
+  set {
+    name  = "data.tolerations[0].effect"
+    value = "NoSchedule"
+  }
+
+  set {
+    name  = "coordinating.tolerations[0].key"
+    value = "elk"
+  }
+
+  set {
+    name  = "coordinating.tolerations[0].operator"
+    value = "Exists"
+  }
+
+  set {
+    name  = "coordinating.tolerations[0].effect"
+    value = "NoSchedule"
+  }
+
+  set {
+    name  = "ingest.tolerations[0].key"
+    value = "elk"
+  }
+
+  set {
+    name  = "ingest.tolerations[0].operator"
+    value = "Exists"
+  }
+
+  set {
+    name  = "ingest.tolerations[0].effect"
+    value = "NoSchedule"
+  }
 }
