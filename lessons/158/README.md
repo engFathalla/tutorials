@@ -44,3 +44,11 @@ kubectl taint nodes node-00 elk=true:NoSchedule
 5. Run first test
 6. Run second test
 7. Run another test
+
+
+
+
+kubectl taint nodes node-02 fluentd=true:NoSchedule
+kubectl taint nodes node-03 fluentbit=true:NoSchedule
+kubectl taint nodes node-04 logstash=true:NoSchedule
+kubectl taint nodes node-04 prometheus=true:NoSchedule
