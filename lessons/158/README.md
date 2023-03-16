@@ -29,3 +29,18 @@ echo UUID=`sudo blkid -s UUID -o value /dev/sdc` /mnt/disks/$DISK_UUID ext4 defa
 kubectl label node node-00 service=elk
 
 kubectl taint nodes node-00 elk=true:NoSchedule
+
+
+
+
+
+
+
+1. Dashboard
+2. Setup
+3. explain 3* tests
+3. Explain what each component is
+4. Show example from one of the agent (say you can find the code in the github)
+5. Run first test
+6. Run second test
+7. Run another test
