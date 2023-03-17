@@ -1,11 +1,11 @@
 resource "helm_release" "argocd" {
   name = "argo-cd"
 
-  repository       = "https://istio-release.storage.googleapis.com/charts"
+  repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   namespace        = "argocd"
   create_namespace = true
   version          = "3.35.4"
 
-  values = [file("terraform/values/argo-cd.yaml")]
+  values = [file("values/argo-cd.yaml")]
 }
