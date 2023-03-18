@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: myapp-fluentd
   namespace: dev
 spec:
-  replicas: 1
+  replicas: 10
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: myapp
+      app: myapp-fluentd
   template:
     metadata:
       labels:
-        app: myapp
+        app: myapp-fluentd
     spec:
       containers:
-        - name: myapp
+        - name: myapp-fluentd
           imagePullPolicy: Always
           image: aputra/myapp-lesson158:latest
           args:
@@ -34,12 +34,6 @@ spec:
         - key: fluentd
           operator: Exists
           effect: NoSchedule
-        - key: fluentbit
-          operator: Exists
-          effect: NoSchedule
-        - key: logstash
-          operator: Exists
-          effect: NoSchedule
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -49,12 +43,3 @@ spec:
                     operator: In
                     values:
                       - myapp
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - myapp
-              topologyKey: "kubernetes.io/hostname"
