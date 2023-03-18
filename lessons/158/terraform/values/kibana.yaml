@@ -1,0 +1,9 @@
+---
+persistence:
+  enabled: false
+nodeSelector:
+  service: kibana
+tolerations:
+  - key: kibana
+    operator: Exists
+    effect: NoSchedule
