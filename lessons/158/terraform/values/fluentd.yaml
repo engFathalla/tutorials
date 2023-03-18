@@ -4,8 +4,10 @@ forwarder:
     - key: fluentd
       operator: Exists
       effect: NoSchedule
+
   nodeSelector:
     service: myapp
+
   configMapFiles:
     fluentd-inputs.conf: |
       # HTTP input for the liveness and readiness probes
@@ -39,7 +41,7 @@ forwarder:
 
       <match **>
         @type elasticsearch
-        host elk-elasticsearch-coordinating-hl.elk
+        host elasticsearch.elk
         port 9200
         logstash_format true
       </match>
