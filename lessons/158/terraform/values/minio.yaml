@@ -6,6 +6,14 @@ tolerations:
     operator: Exists
     effect: NoSchedule
 
+persistence:
+  enabled: true
+  storageClass: ssd
+  size: 97Gi
+
+service:
+  type: LoadBalancer
+
 auth:
   rootUser: admin
   rootPassword: devops123

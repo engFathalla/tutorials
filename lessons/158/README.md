@@ -27,7 +27,7 @@ kubectl label node node-04 service=kibana
 
 
 
-http://192.168.50.210:5601
+http://192.168.50.210:9000
 
 
 
@@ -66,3 +66,17 @@ sudo mkdir /mnt/disks/$DISK_UUID
 sudo mount -t ext4 /dev/sdc /mnt/disks/$DISK_UUID
 
 echo UUID=`sudo blkid -s UUID -o value /dev/sdc` /mnt/disks/$DISK_UUID ext4 defaults 0 2 | sudo tee -a /etc/fstab
+
+
+
+
+
+
+
+BoanS4qNFh1ciuuI
+CG4edX8gEAONn2XHxfQNqVm4ImpbwzGG
+
+kubectl apply -f monitoring/monitoring-ns.yaml
+kubectl apply --server-side -f monitoring/prometheus-operator-crds
+
+kubectl apply --server-side -R -f monitoring
