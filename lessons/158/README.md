@@ -16,3 +16,7 @@ kubectl taint nodes node-01 fluentbit=true:NoSchedule
 kubectl taint nodes node-02 elk=true:NoSchedule
 kubectl taint nodes node-03 elk=true:NoSchedule
 kubectl taint nodes node-04 kibana=true:NoSchedule
+
+kubectl label node node-02 service=elasticsearch
+kubectl label node node-03 service=elasticsearch
+kubectl label node node-04 service=elasticsearch

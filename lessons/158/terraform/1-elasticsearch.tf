@@ -7,5 +7,5 @@ resource "helm_release" "elasticsearch" {
   create_namespace = true
   version          = "19.5.14"
 
-  values = [file("")]
+  values = [file("values/elasticsearch.yaml")]
 }
