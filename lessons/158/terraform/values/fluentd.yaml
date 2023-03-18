@@ -1,0 +1,55 @@
+---
+forwarder:
+  tolerations:
+    - key: fluentd
+      operator: Exists
+      effect: NoSchedule
+  nodeSelector:
+    service: myapp
+  configMapFiles:
+    fluentd-inputs.conf: |
+      # HTTP input for the liveness and readiness probes
+      <source>
+        @type http
+        port 9880
+      </source>
+      # Get the logs from the containers running in the node
+      <source>
+        @type tail
+        path /var/log/containers/*.log
+        # exclude Fluentd logs
+        exclude_path /var/log/containers/*fluentd*.log
+        pos_file /opt/bitnami/fluentd/logs/buffers/fluentd-docker.pos
+        tag kubernetes.*
+        read_from_head true
+      <parse>
+        @type regexp
+        expression /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
+      </parse>
+      </source>
+      # enrich with kubernetes metadata
+      <filter kubernetes.**>
+        @type kubernetes_metadata
+      </filter>
+    fluentd-output.conf: |
+      # Throw the healthcheck to the standard output instead of forwarding it
+      <match fluentd.healthcheck>
+        @type stdout
+      </match>
+
+      <match **>
+        @type elasticsearch
+        host elk-elasticsearch-coordinating-hl.elk
+        port 9200
+        logstash_format true
+      </match>
+    fluentd.conf: |
+      # Ignore fluentd own events
+      <match fluent.**>
+        @type null
+      </match>
+
+      @include fluentd-inputs.conf
+      @include fluentd-output.conf
+aggregator:
+  enabled: false
