@@ -3,7 +3,7 @@ FROM golang:1.19.7-buster AS build
 WORKDIR /app
 
 COPY go.mod ./
-# COPY go.sum ./
+COPY go.sum ./
 
 RUN go mod download && go mod verify
 
