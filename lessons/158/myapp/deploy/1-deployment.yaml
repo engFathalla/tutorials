@@ -20,6 +20,9 @@ spec:
         - name: myapp
           imagePullPolicy: Always
           image: aputra/myapp-lesson158:latest
+          args:
+            - -interval
+            - "1000"
           resources:
             requests:
               memory: 64Mi
