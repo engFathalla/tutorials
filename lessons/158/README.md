@@ -28,6 +28,8 @@ kubectl label node node-04 service=kibana
 
 
 http://192.168.50.210:9000
+http://192.168.50.212:9090
+http://192.168.50.211:3000
 
 
 
