@@ -1,0 +1,2 @@
+- https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+- https://docs.aws.amazon.com/AmazonECR/latest/userguide/push-oci-artifact.html
