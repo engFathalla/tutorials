@@ -33,6 +33,7 @@ forwarder:
       <filter kubernetes.**>
         @type kubernetes_metadata
       </filter>
+
     fluentd-output.conf: |
       # Throw the healthcheck to the standard output instead of forwarding it
       <match fluentd.healthcheck>
@@ -45,6 +46,7 @@ forwarder:
         port 9200
         logstash_format true
       </match>
+
     fluentd.conf: |
       # Ignore fluentd own events
       <match fluent.**>
