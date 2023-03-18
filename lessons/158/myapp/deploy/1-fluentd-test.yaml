@@ -5,7 +5,7 @@ metadata:
   name: myapp-fluentd
   namespace: dev
 spec:
-  replicas: 10
+  replicas: 20
   strategy:
     type: Recreate
   selector:
@@ -22,14 +22,14 @@ spec:
           image: aputra/myapp-lesson158:latest
           args:
             - -interval
-            - "100"
+            - "10"
           resources:
             requests:
               memory: 64Mi
-              cpu: 100m
+              cpu: 50m
             limits:
               memory: 64Mi
-              cpu: 100m
+              cpu: 50m
       tolerations:
         - key: fluentd
           operator: Exists
