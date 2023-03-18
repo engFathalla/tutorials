@@ -28,3 +28,41 @@ kubectl label node node-04 service=kibana
 
 
 http://192.168.50.210:5601
+
+
+
+
+
+kubectl label node node-02 service=s3 --overwrite
+kubectl label node node-03 service=s3 --overwrite
+kubectl label node node-04 service=s3 --overwrite
+
+kubectl taint nodes node-02 s3=true:NoSchedule
+kubectl taint nodes node-03 s3=true:NoSchedule
+kubectl taint nodes node-04 s3=true:NoSchedule
+
+
+kubectl taint nodes node-02 elk=true:NoSchedule-
+kubectl taint nodes node-03 elk=true:NoSchedule-
+kubectl taint nodes node-04 kibana=true:NoSchedule-
+
+
+
+sudo mkdir -p /mnt/disks
+
+sudo mkfs.ext4 /dev/sdb
+DISK_UUID=$(sudo blkid -s UUID -o value /dev/sdb) 
+sudo mkdir /mnt/disks/$DISK_UUID
+sudo mount -t ext4 /dev/sdb /mnt/disks/$DISK_UUID
+
+echo UUID=`sudo blkid -s UUID -o value /dev/sdb` /mnt/disks/$DISK_UUID ext4 defaults 0 2 | sudo tee -a /etc/fstab
+
+
+
+
+sudo mkfs.ext4 /dev/sdc
+DISK_UUID=$(sudo blkid -s UUID -o value /dev/sdc) 
+sudo mkdir /mnt/disks/$DISK_UUID
+sudo mount -t ext4 /dev/sdc /mnt/disks/$DISK_UUID
+
+echo UUID=`sudo blkid -s UUID -o value /dev/sdc` /mnt/disks/$DISK_UUID ext4 defaults 0 2 | sudo tee -a /etc/fstab

@@ -1,0 +1,9 @@
+---
+classes:
+  - name: ssd
+    hostDir: /mnt/disks
+    storageClass: true
+
+daemonset:
+  tolerations:
+    - operator: Exists

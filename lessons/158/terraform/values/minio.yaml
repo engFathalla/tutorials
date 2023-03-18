@@ -1,0 +1,11 @@
+---
+nodeSelector:
+  service: s3
+tolerations:
+  - key: s3
+    operator: Exists
+    effect: NoSchedule
+
+auth:
+  rootUser: admin
+  rootPassword: devops123
