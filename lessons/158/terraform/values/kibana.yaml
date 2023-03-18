@@ -7,3 +7,11 @@ tolerations:
   - key: kibana
     operator: Exists
     effect: NoSchedule
+
+elasticsearch:
+  hosts:
+    - elasticsearch.elk
+  port: "9200"
+
+service:
+  type: LoadBalancer
