@@ -9,6 +9,7 @@ argocd app of apps
 argocd multiple clusters
 argocd autopilot
 argocd eks
+AppProject
 ingress to expose argocd-server
 
 - Declarative setup (https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
@@ -36,6 +37,7 @@ ingress to expose argocd-server
 - Pull image `docker pull nginx:1.23.3`
 - `docker images`
 - `docker tag nginx:1.23.3 aputra/nginx:v0.1.0`
+- `docker login --username aputra`
 - `docker push aputra/nginx:v0.1.0`
 - Upload nginx image
 - Check image in docker hub
@@ -51,6 +53,7 @@ ingress to expose argocd-server
 - updade in git and push
 - go back to ui, wait 5 minutes or click refresh
 - click sync
+- mentione .git suffix in the repository URL
 - update to automatic sync `1-example/application.yaml`
 - kubectl apply -f 1-example/application.yaml
 - release new version
@@ -65,3 +68,36 @@ ingress to expose argocd-server
 
 
 ## Create CD pipeline with private repo and private image
+
+- create private github repo `lesson-158-private`
+- clone `git clone git@github.com:antonputra/lesson-158-private.git`
+- create folders `environments/staging/myapp`
+- create staging namespace and deployment with private image
+- create private dockerhub repo `aputra/nginx-private`
+- `docker tag nginx:1.23.3 aputra/nginx-private:v0.1.0`
+- `docker login --username aputra`
+- `docker push aputra/nginx-private:v0.1.0`
+- commit and push
+- create 2-example
+- apply application `kubectl apply -f 2-example/application.yaml`
+- check errro in argocd ui `rpc error: code = Unknown desc = authentication required`
+- SSH using a private-public key-pair for authentication (explain about personal tockens and github apps)
+- SSH key that grants access to a single repository
+- instructions to setup deploy keys - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys
+- ssh-keygen -t ed25519 -C "argocd@antonputra.com" -f argocd_ed25519
+- for legacy "sh-keygen -t rsa -b 4096 -C "argocd@antonputra.com" -f argocd_ed25519
+- open this key (don't commit this key with the code)
+- add deploy key "argocd"
+- create `2-example/secret.yaml`
+
+
+
+
+
+- setup personal access token, mentione github app authenticate maybe implement later on
+
+
+
+
+
+- setup github app authentication
