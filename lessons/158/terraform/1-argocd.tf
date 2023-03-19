@@ -1,9 +1,9 @@
 resource "helm_release" "argocd" {
   name = "argocd"
 
-  repository       = "https://istio-release.storage.googleapis.com/charts"
+  repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
-  namespace        = "istio-system"
+  namespace        = "argocd"
   create_namespace = true
   version          = "3.35.4"
 
