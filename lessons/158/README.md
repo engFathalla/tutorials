@@ -43,3 +43,7 @@ ingress to expose argocd-server
 - add `myapp` with namespace and deployment
 - commit and push
 - kubectl apply -f 1-example/application.yaml
+- watch kubectl get pods -n prod
+- release new verion of the app 
+docker tag nginx:1.23.3 aputra/nginx:v0.1.1
+docker push aputra/nginx:v0.1.1
