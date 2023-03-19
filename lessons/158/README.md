@@ -44,6 +44,24 @@ ingress to expose argocd-server
 - commit and push
 - kubectl apply -f 1-example/application.yaml
 - watch kubectl get pods -n prod
+- go back to argocd ui and explose architecture of the app
 - release new verion of the app 
-docker tag nginx:1.23.3 aputra/nginx:v0.1.1
-docker push aputra/nginx:v0.1.1
+- docker tag nginx:1.23.3 aputra/nginx:v0.1.1
+- docker push aputra/nginx:v0.1.1
+- updade in git and push
+- go back to ui, wait 5 minutes or click refresh
+- click sync
+- update to automatic sync `1-example/application.yaml`
+- kubectl apply -f 1-example/application.yaml
+- release new version
+- docker tag nginx:1.23.3 aputra/nginx:v0.1.2
+- docker push aputra/nginx:v0.1.2
+- commit and push
+- open argocd ui and wait app upgrade
+- check pod in the terminal
+- create a script to automaticly release a new verion and update git `upgrade.sh`
+- chmod +x upgrade.sh
+- remove application `kubectl delete -f 1-example/application.yaml`
+
+
+## Create CD pipeline with private repo and private image
