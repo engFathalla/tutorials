@@ -51,5 +51,13 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name stdout
-        Match kube.*
+      Name                         s3
+      Match                        kube.*
+      bucket                       fluentbit
+      region                       us-west-1
+      endpoint                     "http://minio.s3:9000/"
+      compression                  gzip
+      total_file_size              256M
+      upload_timeout               10m
+      s3_key_format                /$TAG[2]/$TAG[0]/%Y/%m/%d/%H/%M/%S/$UUID.gz
+      s3_key_format_tag_delimiters .-

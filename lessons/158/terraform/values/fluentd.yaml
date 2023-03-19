@@ -57,6 +57,7 @@ forwarder:
         s3_endpoint "http://minio.s3:9000/"
         force_path_style true
         s3_region us-west-1
+        store_as gzip
         path logs/
 
         <buffer tag,time>
