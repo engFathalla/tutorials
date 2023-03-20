@@ -128,27 +128,14 @@ You can create an app that creates other apps, which in turn can create other ap
 - kubectl get pods -n staging
 - kubectl get pods -n dev
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## helm #2
+- create `4-example`
+- create `4-example/application.yaml`
+- kubectl apply -f 4-example/application.yaml
+
+
 from repo
+
 from source
 
 ## helm (argocd app of apps) #2
