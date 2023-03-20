@@ -33,6 +33,52 @@
 
 
 
+## Create first CD pipeline with public repo & image #1
+
+- Create public GitHub repo `lesson-158`
+- `cd ~/devel`
+- `git clone git@github.com:antonputra/lesson-158.git`
+- Create dockerhub account
+- Search for nginx image
+- `docker login --username aputra`
+- Pull image `docker pull nginx:1.23.3`
+- `docker images`
+- `docker tag nginx:1.23.3 aputra/nginx:v0.1.0`
+- `docker images`
+- `docker push aputra/nginx:v0.1.0`
+- Check image in docker hub
+- add `my-app` with namespace and deployment
+- commit and push
+- create `1-example/application.yaml` (wihout syncPolicy)
+- open argocd ui `http://locahost:8080`
+- `kubectl apply -f 1-example/application.yaml`
+- `watch kubectl get pods -n prod`
+- go back to argocd ui and click sync
+
+
+- go back to argocd ui and explose architecture of the app
+- release new verion of the app 
+- docker tag nginx:1.23.3 aputra/nginx:v0.1.1
+- docker push aputra/nginx:v0.1.1
+- updade in git and push
+- go back to ui, wait 5 minutes or click refresh
+- click sync
+- mentione .git suffix in the repository URL
+- update to automatic sync `1-example/application.yaml`
+- kubectl apply -f 1-example/application.yaml
+- release new version
+- docker tag nginx:1.23.3 aputra/nginx:v0.1.2
+- docker push aputra/nginx:v0.1.2
+- commit and push
+- open argocd ui and wait app upgrade
+- check pod in the terminal
+- create a script to automaticly release a new verion and update git `upgrade.sh`
+- chmod +x upgrade.sh
+- remove application `kubectl delete -f 1-example/application.yaml`
+
+
+
+
 
 
 
