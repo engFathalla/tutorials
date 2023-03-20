@@ -132,13 +132,14 @@ You can create an app that creates other apps, which in turn can create other ap
 - create `4-example`
 - create `4-example/application.yaml`
 - kubectl apply -f 4-example/application.yaml
+- kubectl delete -f 4-example/application.yaml
 
 
 from repo
+- generate new helm chart
 
-from source
 
-## helm (argocd app of apps) #2
+
 ## AppProject
 
 ## kustomize #2
