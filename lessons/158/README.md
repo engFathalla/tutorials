@@ -80,7 +80,7 @@ ingress to expose argocd-server
 - commit and push
 - create 2-example
 - apply application `kubectl apply -f 2-example/application.yaml`
-- check errro in argocd ui `rpc error: code = Unknown desc = authentication required`
+- check errro in argocd ui `rpc error: code = Unknown desc = error creating SSH agent: "SSH agent requested but SSH_AUTH_SOCK not-specified"`
 - SSH using a private-public key-pair for authentication (explain about personal tockens and github apps)
 - SSH key that grants access to a single repository
 - instructions to setup deploy keys - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys
@@ -89,10 +89,16 @@ ingress to expose argocd-server
 - open this key (don't commit this key with the code)
 - add deploy key "argocd"
 - create `2-example/secret.yaml`
+- apply `kubectl apply -f 2-example/secret.yaml`
+- get pods
+- describe pod (pull access denied for aputra/nginx-private, repository does not exist or may require 'docker login)
+- pull image from private repo - https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+- generate github token: read only - minikube
 
 
 
 
+- add finilizer
 
 - setup personal access token, mentione github app authenticate maybe implement later on
 
