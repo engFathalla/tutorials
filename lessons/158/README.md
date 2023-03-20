@@ -1,16 +1,142 @@
+## Instal Argocd (bare minimum) #1
+
+- install kubectl and helm cli and docker
+- minikube now supports docker
+- Install Minikube (https://minikube.sigs.k8s.io/docs/start/) 
+- `brew install minikube`
+- Start specific k8s version `minikube start --kubernetes-version=v1.26.1`
+- `kubectl get nodes`
+- check taints on contol plane `kubectl describe node minikube`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - Declarative setup (https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
 
 
 
 ## Instal Argocd (bare minimum) #1
 
-- install kubectl and helm cli
-- Install Minikube (https://minikube.sigs.k8s.io/docs/start/) 
-- minikube now supports docker
-- get nodes
-- no taints
-- Start minikube `minikube start`
-- Start specific k8s version `minikube start --kubernetes-version=v1.26.1`
+
+
+
+
+
+
 - Get admin secret `kubectl get secrets argocd-initial-admin-secret -o yaml -n argocd`
 - However, most users will want to explicitly configure the certificates for these TLS endpoints, possibly using automated means such as cert-manager or using their own dedicated Certificate Authority. (will help with ingress)
 - Expose argocd server`kubectl port-forward svc/argocd-server -n argocd 8080:80`
