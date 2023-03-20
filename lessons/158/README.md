@@ -2,14 +2,19 @@
 
 - install kubectl and helm cli and docker
 - minikube now supports docker
-- Install Minikube (https://minikube.sigs.k8s.io/docs/start/) 
+- Install Minikube (https://minikube.sigs.k8s.io/docs/start/) - open web and show instructions
 - `brew install minikube`
 - Start specific k8s version `minikube start --kubernetes-version=v1.26.1`
 - `kubectl get nodes`
 - check taints on contol plane `kubectl describe node minikube`
-
-
-
+- `helm repo add argo https://argoproj.github.io/argo-helm`
+- `helm repo update`
+- `helm search repo argocd`
+- `helm show values argo/argo-cd --version 3.35.4 > argocd-defaults.yaml`
+- create folder `terraform` - explain that I'll give you plain helm commands
+- create `terraform/0-provider.tf`
+- create `terraform/1-argocd.tf`
+- create `values/argocd.yaml`
 
 
 
